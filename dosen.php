@@ -1,27 +1,24 @@
 <?php
-session_start();
 
-// Enable error reporting
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// Include database connection file
+include("koneksi.php");
 
-// Check if user is admin
-if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
-    header('Location: login.php');
-    exit();
-}
-
-include("koneksi.php"); // Memuat koneksi ke database
-
-// Lakukan query untuk mengambil data dosen
+// Query to fetch data
 $sql = "SELECT dosen.id, fakultas.nama_fakultas, program_studi.nama_program_studi, dosen.nama_dosen
         FROM dosen
         INNER JOIN program_studi ON dosen.id_program_studi = program_studi.id
         INNER JOIN fakultas ON program_studi.id_fakultas = fakultas.id";
 $result = $conn->query($sql);
 
+// Query to fetch fakultas data
+$sql_fakultas = "SELECT id, nama_fakultas FROM fakultas";
+$result_fakultas = $conn->query($sql_fakultas);
+
+// Query to fetch program studi data
+$sql_program_studi = "SELECT id, nama_program_studi FROM program_studi";
+$result_program_studi = $conn->query($sql_program_studi);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +26,7 @@ $result = $conn->query($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar Dosen - Siakad</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="dashboard.css?v=<?php echo time();?>">
+    <link rel="stylesheet" href="dashboard.css?v=<?php echo time(); ?>">
     <style>
         .modal {
             display: none;
@@ -40,10 +37,11 @@ $result = $conn->query($sql);
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgb(0,0,0);
-            background-color: rgba(0,0,0,0.4);
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
             padding-top: 60px;
         }
+
         .modal-content {
             background-color: #fefefe;
             margin: 5% auto;
@@ -51,12 +49,14 @@ $result = $conn->query($sql);
             border: 1px solid #888;
             width: 80%;
         }
+
         .close {
             color: #aaaaaa;
             float: right;
             font-size: 28px;
             font-weight: bold;
         }
+
         .close:hover,
         .close:focus {
             color: #000;
@@ -72,12 +72,12 @@ $result = $conn->query($sql);
         </div>
         <ul>
             <li><a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a></li>
-            <li><a href="fakultas.php"><i class="fas fa-building"></i> Fakultas</a></li>
+            <li><a href="fakulltas.php"><i class="fas fa-building"></i> Fakultas</a></li>
             <li><a href="programstudi.php"><i class="fas fa-graduation-cap"></i> Program Studi</a></li>
             <li><a href="matakuliah.php"><i class="fas fa-book"></i> Mata Kuliah</a></li>
             <li><a href="dosen.php" class="active"><i class="fas fa-chalkboard-teacher"></i> Daftar Dosen</a></li>
             <li><a href="mahasiswa.php"><i class="fas fa-user-graduate"></i> Mahasiswa</a></li>
-            <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            <li><a href="login.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
     </div>
     <div class="main-content">
@@ -105,7 +105,7 @@ $result = $conn->query($sql);
                             <option value="">Pilih Fakultas</option>
                             <?php
                             if ($result_fakultas->num_rows > 0) {
-                                while($row_fakultas = $result_fakultas->fetch_assoc()) {
+                                while ($row_fakultas = $result_fakultas->fetch_assoc()) {
                                     echo "<option value='{$row_fakultas['id']}'>{$row_fakultas['nama_fakultas']}</option>";
                                 }
                             } else {
@@ -119,7 +119,7 @@ $result = $conn->query($sql);
                             <option value="">Pilih Program Studi</option>
                             <?php
                             if ($result_program_studi->num_rows > 0) {
-                                while($row_program_studi = $result_program_studi->fetch_assoc()) {
+                                while ($row_program_studi = $result_program_studi->fetch_assoc()) {
                                     echo "<option value='{$row_program_studi['id']}'>{$row_program_studi['nama_program_studi']}</option>";
                                 }
                             } else {
@@ -156,14 +156,14 @@ $result = $conn->query($sql);
                     <?php
                     if ($result->num_rows > 0) {
                         // Output data setiap baris
-                        while($row = $result->fetch_assoc()) {
+                        while ($row = $result->fetch_assoc()) {
                             echo "<tr>";
                             echo "<td>{$row['id']}</td>";
                             echo "<td>{$row['nama_fakultas']}</td>";
                             echo "<td>{$row['nama_program_studi']}</td>";
                             echo "<td>{$row['nama_dosen']}</td>";
                             echo "<td>";
-                            echo "<a href='editDosen.php?id={$row['id']}'>Edit</a> | ";
+                            echo "<a href='editdosen.php?id={$row['id']}'>Edit</a> | ";
                             echo "<a href='deleteDosen.php?id={$row['id']}' onclick=\"return confirm('Anda yakin ingin menghapus data dosen ini?')\">Hapus</a>";
                             echo "</td>";
                             echo "</tr>";

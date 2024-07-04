@@ -2,21 +2,25 @@
 // Koneksi ke database
 include("koneksi.php");
 
-// Ambil data dari form
-$nama_fakultas = $_POST['nama_fakultas'];
+// Ambil data yang dikirimkan dari form
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nama_fakultas = $_POST['nama_fakultas'];
 
-// Insert data ke tabel fakultas
-$sql = "INSERT INTO fakultas (nama_fakultas) VALUES ('$nama_fakultas')";
+    // Insert data fakultas ke dalam database
+    $sql = "INSERT INTO fakultas (nama_fakultas) VALUES (?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $nama_fakultas);
 
-if ($conn->query($sql) === TRUE) {
-    // Redirect kembali ke halaman fakultas setelah berhasil menambahkan data
-    header('Location: fakulltas.php');
-    exit();
-} else {
-    // Tampilkan pesan error jika query tidak berhasil
-    echo "Error: " . $sql . "<br>" . $conn->error;
+    if ($stmt->execute()) {
+        // Redirect ke halaman fakultas.php setelah berhasil ditambahkan
+        header('Location: fakulltas.php');
+        exit();
+    } else {
+        echo "Error: " . $conn->error;
+    }
+
+    $stmt->close();
 }
 
-// Tutup koneksi ke database
 $conn->close();
 ?>

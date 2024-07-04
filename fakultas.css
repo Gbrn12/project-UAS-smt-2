@@ -7,14 +7,14 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #ffffff; /* Background color: white */
-    color: #000000; /* Main text color: black */
+    background-color: #ffffff; /* Warna latar belakang yang putih */
+    color: #000000; /* Warna teks utama hitam */
 }
 
 .sidebar {
     width: 250px;
     height: 100vh;
-    background: #00abe4; /* Bright blue sidebar */
+    background: #00abe4; /* Warna sidebar biru cerah */
     padding: 20px;
     box-sizing: border-box;
     position: fixed;
@@ -26,7 +26,7 @@ body {
 }
 
 .sidebar .logo h2 {
-    color: #ffffff; /* Logo text color: white */
+    color: #ffffff; /* Warna teks logo putih */
     margin: 0;
 }
 
@@ -40,32 +40,33 @@ body {
 }
 
 .sidebar ul li a {
-    color: #000000; /* Menu text color: black */
+    color: #000000; /* Warna teks menu putih */
     text-decoration: none;
     font-size: 16px;
     display: flex;
     align-items: center;
     padding: 10px;
     border-radius: 5px;
-    transition: none; /* No transition effect */
+    transition: none; /* Hapus efek transisi */
 }
 
 .sidebar ul li a:hover, .sidebar ul li a.active {
-    background: #e9f1fa; /* Background color on hover and active: light blue */
+    background: #e9f1fa; /* Warna latar belakang menu aktif dan hover */
 }
 
 .main-content {
     margin-left: 250px;
     padding: 20px;
     box-sizing: border-box;
-    background: #e9f1fa; /* Main content background color: light blue */
-    color: #000000; /* Main text color: black */
+    background: #e9f1fa; /* Warna latar belakang konten utama */
+    color: #000000; /* Warna teks utama hitam */
 }
 
+/* CSS Tambahan */
 header {
     display: flex;
     align-items: center;
-    justify-content: flex-end; /* Justify content to the right */
+    justify-content: flex-end; /* Justifikasi konten ke kanan */
     margin-bottom: 20px;
 }
 
@@ -82,6 +83,7 @@ header img {
 .user-wrapper h4 {
     margin: 0;
 }
+
 main {
     margin-bottom: 20px;
 }
@@ -97,32 +99,47 @@ main {
 h2 {
     margin-bottom: 10px;
 }
-/* CSS for table */
+
+.add-button {
+    background-color: #00abe4; /* Warna tombol tambah */
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.add-button:hover {
+    background-color: #0077b6; /* Warna tombol tambah saat hover */
+}
+
+.table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #ffffff; /* Table background color: white */
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05); /* Shadow effect */
-    overflow: hidden;
 }
 
 table th,
 table td {
-    border: 1px solid #ddd; /* Cell border */
-    padding: 12px; /* Cell padding */
-    text-align: left; /* Text alignment */
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
 }
 
 table th {
-    background-color: #e9f1fa; /* Table header background color: light blue */
-    color: #000000; /* Table header text color: black */
-    font-weight: bold; /* Bold header text */
+    background-color: #e9f1fa; /* Warna latar belakang header tabel */
+    color: #000000; /* Warna teks header tabel */
 }
 
 table tr:nth-child(even) {
-    background-color: #f9f9f9; /* Even row background color */
+    background-color: #f9f9f9;
 }
+
 .empty-state {
     padding: 20px;
     background-color: #f2f2f2;
@@ -132,7 +149,6 @@ table tr:nth-child(even) {
     color: #777;
 }
 
-/* CSS for action buttons */
 .add {
     padding: 1rem 2rem;
     font-weight: 700;
@@ -149,9 +165,6 @@ table tr:nth-child(even) {
         border-bottom,
         border-right,
         box-shadow;
-
-    margin-bottom: 10px;
-    margin-right: 15px;
 }
 
 .add:hover {
@@ -162,9 +175,13 @@ table tr:nth-child(even) {
     box-shadow: rgba(0, 171, 228, 0.4) 5px 5px, rgba(0, 171, 228, 0.3) 10px 10px, rgba(0, 171, 228, 0.2) 15px 15px;
 }
 
-.action-buttons {
-    display: flex;
-    align-items: center;
+.edit-form,
+.delete-form {
+    display: inline-block; /* Menampilkan form dalam satu baris */
+}
+
+.delete-form {
+    margin-left: 5px; /* Jarak kiri antara tombol Edit dan tombol Delete */
 }
 
 .edit-btn,
@@ -178,7 +195,6 @@ table tr:nth-child(even) {
     background-color: #ffffff; /* Warna latar belakang tombol Edit (Putih) */
     color: #00ABE4; /* Warna teks tombol Edit (Biru cerah) */
     border: 1px solid #00ABE4; /* Garis pinggir tombol Edit (Biru cerah) */
-    margin-right: 15px; /* Jarak antara tombol Edit dan tombol Delete */
 }
 
 .edit-btn:hover {
@@ -198,7 +214,6 @@ table tr:nth-child(even) {
     color: #0077b6; /* Warna teks tombol Delete saat hover (Biru lebih gelap) */
     border-color: #0077b6; /* Garis pinggir tombol Delete saat hover (Biru lebih gelap) */
 }
-
 
 .modal {
     display: none;
@@ -240,6 +255,8 @@ table tr:nth-child(even) {
         width: 80%;
     }
 }
+
+/* CSS untuk footer */
 .footer {
     background-color: #00abe4; /* Warna latar belakang footer */
     color: #ffffff; /* Warna teks footer */
@@ -260,59 +277,60 @@ table tr:nth-child(even) {
     color: #f2f2f2; /* Warna teks tautan saat hover */
 }
 .tombol {
-    width: 50px;
-height: 50px;
-border-radius: 100%; /* Membuat tombol bundar dengan border-radius 50% */
-background-color:#00abe4;
-border: none;
-font-weight: 600;
-display: flex;
-align-items: center;
-justify-content: center;
-box-shadow: 0px 0px 0px 4px rgba(180, 160, 255, 0.253);
-cursor: pointer;
-transition-duration: 0.3s;
-overflow: hidden;
-position: fixed;
-bottom: 20px;
-right: 20px;
-z-index: 1000;
-}
-
-.svgIcon {
-width: 12px;
-transition-duration: 0.3s;
-}
-
-.svgIcon path {
-fill: white;
-}
-
-.tombol:hover {
-width: 140px;
-border-radius: 50px; /* Ketika di-hover, memperbesar dan membulatkan tombol */
-transition-duration: 0.3s;
-background-color: #00abe4;
-align-items: center;
-}
-
-.tombol:hover .svgIcon {
-transition-duration: 0.3s;
-transform: translateY(-200%);
-}
-
-.tombol::before {
-position: absolute;
-bottom: -20px;
-content: "Back to Top";
-color: white;
-/* transition-duration: .3s; */
-font-size: 0px;
-}
-
-.tombol:hover::before {
-font-size: 13px;
-opacity: 1;
-bottom: unset;
-transition-duration: 0.3s;
-}
+        width: 50px;
+    height: 50px;
+    border-radius: 100%; /* Membuat tombol bundar dengan border-radius 50% */
+    background-color:#00abe4;
+    border: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 0px 4px rgba(180, 160, 255, 0.253);
+    cursor: pointer;
+    transition-duration: 0.3s;
+    overflow: hidden;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+  
+  .svgIcon {
+    width: 12px;
+    transition-duration: 0.3s;
+  }
+  
+  .svgIcon path {
+    fill: white;
+  }
+  
+  .tombol:hover {
+    width: 140px;
+    border-radius: 50px; /* Ketika di-hover, memperbesar dan membulatkan tombol */
+    transition-duration: 0.3s;
+    background-color: #00abe4;
+    align-items: center;
+  }
+  
+  .tombol:hover .svgIcon {
+    transition-duration: 0.3s;
+    transform: translateY(-200%);
+  }
+  
+  .tombol::before {
+    position: absolute;
+    bottom: -20px;
+    content: "Back to Top";
+    color: white;
+    /* transition-duration: .3s; */
+    font-size: 0px;
+  }
+  
+  .tombol:hover::before {
+    font-size: 13px;
+    opacity: 1;
+    bottom: unset;
+    transition-duration: 0.3s;
+  }
+  

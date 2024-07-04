@@ -1,40 +1,22 @@
 <?php
-session_start();
 
-// Enable error reporting
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-// Check if user is admin
-if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
-    header('Location: login.php');
-    exit();
-}
-
+// Include database connection file
 include("koneksi.php");
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['id_dosen'])) {
-        $id_dosen = $_POST['id_dosen'];
-
-        // Delete data dosen
-        $stmt = $conn->prepare("DELETE FROM dosen WHERE id=?");
-        $stmt->bind_param("i", $id_dosen);
-
-        if ($stmt->execute()) {
-            // Redirect back to dosen.php with success message
-            header('Location: dosen.php?success_delete=1');
-            exit();
-        } else {
-            // Handle error
-            echo "Error: " . $stmt->error;
-        }
-
-        $stmt->close();
+// Check if ID parameter exists
+if (isset($_GET['id'])) {
+    $id_dosen = $_GET['id'];
+    $sql = "DELETE FROM dosen WHERE id = $id_dosen";
+    
+    if (mysqli_query($conn, $sql)) {
+        header('Location: dosen.php?success_delete=1');
+        exit();
     } else {
-        echo "ID Dosen tidak valid.";
+        echo "Error deleting record: " . mysqli_error($conn);
     }
+    
+
+    $stmt->close();
 }
 
 $conn->close();
